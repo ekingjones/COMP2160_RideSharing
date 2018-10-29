@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">COMP2160_RideSharing</string>
+    <string name="dest_hint">Enter an address or city:</string>
 </resources>
