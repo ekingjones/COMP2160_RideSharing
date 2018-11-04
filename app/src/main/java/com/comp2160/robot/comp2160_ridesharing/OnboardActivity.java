@@ -1,5 +1,6 @@
 package com.comp2160.robot.comp2160_ridesharing;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.xmlpull.v1.sax2.Driver;
 
 public class OnboardActivity extends AppCompatActivity implements OnMapReadyCallback {
     // global variables
@@ -38,7 +41,7 @@ public class OnboardActivity extends AppCompatActivity implements OnMapReadyCall
         // used to set custom toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setSubtitle("Find a Ride");         // *add this to string file
+        toolbar.setSubtitle("Find a Ride");         // TODO *add this to string file
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -49,14 +52,34 @@ public class OnboardActivity extends AppCompatActivity implements OnMapReadyCall
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
+                        // switch to handle navigation between activities
+                        int id = menuItem.getItemId();
+                        switch (id) {
+                            case(R.id.nav_1):
+                                // nav_1 is this current activity, so instead of reloading the activity
+                                // with an intent, simply close the drawer and take the user back to the screen
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case(R.id.nav_2):
+                                // nav_2 is the DriverStartActivity, so when this item is selected
+                                // the DriverStart activity is started
+                                Intent i2 = new Intent(OnboardActivity.this, DriverStartActivity.class);
+                                startActivity(i2);
+                                break;
+                            case(R.id.nav_3):
+                                // TODO add when  trips layout is complete
+                                //Intent i3 = new Intent(OnboardActivity.this, trip_layout);
+                                //startActivity(i3);
+                                break;
+                            case(R.id.nav_4):
+                                // TODO add when setting layout is complete
+                                //Intent i4 = new Intent(OnboardActivity.this, settings_layout);
+                                //startActivity(i4);
+                                break;
+
+                        }
+                        // closes drawer after item is selected
                         mDrawerLayout.closeDrawers();
-
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
                         return true;
                     }
                 });
