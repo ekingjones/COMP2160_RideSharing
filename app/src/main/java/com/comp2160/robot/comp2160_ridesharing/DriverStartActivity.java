@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import java.sql.Driver;
+
 public class DriverStartActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
@@ -44,11 +46,16 @@ public class DriverStartActivity extends AppCompatActivity {
                                 break;
                             case(R.id.nav_2):
                                 mDrawerLayout.closeDrawers();
-
-
+                                break;
+                            case(R.id.nav_3):
+                                //Intent i3 = new Intent(DriverStartActivity.this, trip_activity.class);
+                                //startActivity(i3);
+                                break;
+                            case(R.id.nav_4):
+                                //Intent i4 = new Intent(DriverStartActivity.this, settings_activity.class);
+                                //startActivity(i4);
+                                break;
                         }
-
-
                         return true;
                     }
                 });

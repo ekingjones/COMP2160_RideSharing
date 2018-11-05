@@ -1,6 +1,8 @@
 package com.comp2160.robot.comp2160_ridesharing;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,22 +12,30 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar; /* **THIS IS IMPORTANT you need this import instead of
                                              android.widget.Toolbar, it will not function */
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.xmlpull.v1.sax2.Driver;
 
+import java.io.IOException;
+import java.util.List;
+
 public class OnboardActivity extends AppCompatActivity implements OnMapReadyCallback {
     // global variables
     private DrawerLayout mDrawerLayout;
     private MapView mapView;
     private GoogleMap mMap;
+
 
     // final vars and keys
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
@@ -100,6 +110,28 @@ public class OnboardActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
+    // method to get destination from user and display it on map
+    public void getUserDestination(View view){
+        EditText destQuery = (EditText)findViewById(R.id.destRequest);
+        String location = destQuery.getText().toString();
+        List<Address> addressList = null;
+
+        if(location != null || !location.equals("")){
+            Geocoder geocoder = new Geocoder(this);
+            try{
+                addressList = geocoder.getFromLocationName(location, 1);
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        }
+
+    }
+
     // this opens the menu when the icon in the toolbar is clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -115,10 +147,17 @@ public class OnboardActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        // ui settings for display7
+        UiSettings uiSettings = mMap.getUiSettings();
+        uiSettings.setMyLocationButtonEnabled(true);
+        uiSettings.setMapToolbarEnabled(true);
+        uiSettings.setCompassEnabled(true);
+        uiSettings.setZoomControlsEnabled(true);
+        uiSettings.setZoomGesturesEnabled(true);
         // drops a pin at specified location
-        LatLng seattle = new LatLng(47.6062095, -122.3320708);
-        mMap.addMarker(new MarkerOptions().position(seattle).title("Seattle"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(seattle));
+        //LatLng seattle = new LatLng(47.6062095, -122.3320708);
+        //mMap.addMarker(new MarkerOptions().position(seattle).title("Seattle"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(seattle));
 
     }
 
