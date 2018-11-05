@@ -1,4 +1,4 @@
-# COMP2160 Carpool App
+# COMP2160 Carpool App / Tag Along
 Introduction:
 ----------------------------------
 We are a team of four computer science students based at Thompson Rivers University, in the lower main-land of beautiful British Columbia! This is an Android app, and the term project for course COMP 2160, Mobile Applications.
