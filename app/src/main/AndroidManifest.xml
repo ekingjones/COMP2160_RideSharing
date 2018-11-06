@@ -16,14 +16,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCBvJQZNfqCCMtCwjVbENQCyp9xhC-BQlU" />
 
-        <activity android:name=".OnboardActivity">
+        <activity android:name=".OnboardActivity"></activity>
+        <activity android:name=".DriverStartActivity" />
+        <activity android:name=".FindRideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DriverStartActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
