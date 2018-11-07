@@ -32,7 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- make sure to use this across activies-->
                 <EditText
                     android:id="@+id/numOfSeats"
                     android:layout_width="368dp"
@@ -106,7 +105,6 @@
 
             </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.NestedScrollView>
-
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
