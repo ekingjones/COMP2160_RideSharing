@@ -5,4 +5,7 @@
     This is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is Text
     This is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is TextThis is Text
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -13,13 +13,20 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.sql.Driver;
 import java.util.Calendar;
 
-public class DriverStartActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+public class DriverStartActivity extends AppCompatActivity {
+    // main component variables
     private DrawerLayout mDrawerLayout;
+
+    // text view variables
+    private TextView depatTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,23 +85,31 @@ public class DriverStartActivity extends AppCompatActivity implements TimePicker
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO fix this mess to add time picker, and add date picker as well
-    /*@Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the current time as the default values for the picker
-        final Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
+    public void showTimePickerFragment(View v){
+        DialogFragment newFrag = new TimePickerFragment();
+        newFrag.show(getSupportFragmentManager(), "timePicker");
+        int driverHour = TimePickerFragment.userHour;
+        int driverMin = TimePickerFragment.userMin;
+        showTime(driverHour, driverMin);
+        //String testHour = Integer.toString(driverHour);
+        //String testMin = Integer.toString(driverMin);
+        //String test = ("Chosen Time:" + testHour + testMin);
+        //Toast.makeText(this, test, Toast.LENGTH_LONG).show();
 
-        // Create a new instance of TimePickerDialog and return it
-        return new TimePickerDialog(getActivity(), this, hour, minute,
-                DateFormat.is24HourFormat(getActivity()));
-    }*/
-
-
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        // this method will do something with the time the user picks
-        // probably set the text of the label that they touch
     }
+
+    // TODO
+    // problem, the toast fires ON the click, not after the time has been set
+    // so right now, it is always zero
+    // need to find a way to actually get and display the time
+    // my theory, is to put this in the onTimeSet method in the TimePickerFragment
+    // then it may just fire after the time is picked, instead of on click
+    public void showTime(int mHour, int mMin){
+        String testHour = Integer.toString(mHour);
+        String testMin = Integer.toString(mMin);
+        String test = ("Chosen Time:" + testHour + testMin);
+        Toast.makeText(this, test, Toast.LENGTH_LONG).show();
+    }
+
+
 }
