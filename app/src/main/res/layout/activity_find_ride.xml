@@ -37,56 +37,45 @@
                     android:layout_width="368dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="21dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="21dp"
                     android:ems="10"
                     android:hint="Number of seats"
                     android:inputType="number"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/DestLocation" />
+                    tools:layout_editor_absoluteY="332dp" />
 
                 <TextView
                     android:id="@+id/tripDetailsTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="8dp"
                     android:text="Trip Details"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toTopOf="@+id/startingLocation"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="16dp" />
 
                 <EditText
                     android:id="@+id/DestLocation"
                     android:layout_width="368dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="21dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="21dp"
                     android:ems="10"
                     android:hint="Destination"
                     android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pickupLocation" />
 
                 <EditText
                     android:id="@+id/pickupLocation"
-                    android:layout_width="369dp"
+                    android:layout_width="307dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="21dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:ems="10"
                     android:hint="Pickup Location"
                     android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tripDetailsTextView3" />
 
@@ -95,13 +84,33 @@
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="115dp"
-                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="116dp"
                     android:text="See On Map"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/numOfSeats" />
+                    tools:layout_editor_absoluteY="397dp" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="56dp"
+                    app:layout_constraintStart_toEndOf="@+id/pickupLocation"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_mylocation" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="368dp"
+                    android:layout_height="47dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="27dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/DestLocation" />
 
             </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.NestedScrollView>

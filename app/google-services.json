@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "925848025442",
+    "firebase_url": "https://comp2160-ride-sh-1539734654049.firebaseio.com",
+    "project_id": "comp2160-ride-sh-1539734654049",
+    "storage_bucket": "comp2160-ride-sh-1539734654049.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925848025442:android:1c87f559c9b615b0",
+        "android_client_info": {
+          "package_name": "com.comp2160.robot.comp2160_ridesharing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925848025442-9ff075rlsetcnfp89t47uk0i4rcar6ek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.comp2160.robot.comp2160_ridesharing",
+            "certificate_hash": "ee92df2b114d74a1204efb54caadf4dd9d72ae16"
+          }
+        },
+        {
+          "client_id": "925848025442-jt3v2qaaj7bvtafqbk5o7omr89jhrsdr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJuFL6-1e_wJ76XAPYfGHi1wN92C02KUg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925848025442-jt3v2qaaj7bvtafqbk5o7omr89jhrsdr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

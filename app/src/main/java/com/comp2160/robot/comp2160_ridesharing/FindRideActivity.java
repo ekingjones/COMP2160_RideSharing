@@ -59,6 +59,9 @@ public class FindRideActivity extends AppCompatActivity {
                                 //Intent i4 = new Intent(FindRideActivity.this, settings_layout);
                                 //startActivity(i4);
                                 break;
+                            case(R.id.nav_5):
+                                Intent i5 = new Intent(FindRideActivity.this, TestActivity.class);
+                                startActivity(i5);
 
                         }
                         // closes drawer after item is selected
