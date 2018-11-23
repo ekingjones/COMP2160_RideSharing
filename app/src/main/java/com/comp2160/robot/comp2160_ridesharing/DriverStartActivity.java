@@ -3,6 +3,7 @@ package com.comp2160.robot.comp2160_ridesharing;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
@@ -12,21 +13,46 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
+
 import java.sql.Driver;
+import java.sql.Time;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverStartActivity extends AppCompatActivity {
+    // tags
+    public static final String mTAG = "COMP2160";
+    // cloud vars
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     // main component variables
     private DrawerLayout mDrawerLayout;
 
-    // text view variables
-    private TextView depatTime;
+    // trip param variables
+    private Time depatTime;
+    private Date departDate;
+    private String startLocation;
+    private String endLocation;
+
+    // car data variables
+    private String carModel;
+    private int numOfSeats;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +135,45 @@ public class DriverStartActivity extends AppCompatActivity {
         String testMin = Integer.toString(mMin);
         String test = ("Chosen Time:" + testHour + testMin);
         Toast.makeText(this, test, Toast.LENGTH_LONG).show();
+    }
+
+    // updates data from user entries and assigns to global vars for easy access
+    public void getData(){
+        TextView startLocal = (TextView) (findViewById(R.id.startingLocation));
+        TextView endLocal = (TextView) findViewById(R.id.destLocation);
+        startLocation = startLocal.getText().toString();
+        endLocation = endLocal.getText().toString();
+    }
+
+
+    // method to get all data from trip to upload to firestore db
+    public void sendData(View v){
+        // calls getData method to update the trip info before submitting
+        getData();
+
+        // gets the collection of available trips for cloud
+        Map<String, Object> avail_trips = new HashMap<>();
+
+        // gets user entry data and submits to available trips database
+        avail_trips.put("depart_local", startLocation);
+        avail_trips.put("dest_local", endLocation);
+
+        // listeners for success and fail
+        db.collection("avail_trips")
+                .add(avail_trips)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(mTAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(mTAG, "Error adding document", e);
+                    }
+                });
+
     }
 
 
