@@ -118,6 +118,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:text="Air Conditioning"
+                    android:onClick="onCheckboxClicked"
                     app:layout_constraintEnd_toStartOf="@+id/wheelchairCheckBox"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +131,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:text="Heater"
+                    android:onClick="onCheckboxClicked"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/acCheckBox" />
 
@@ -140,6 +142,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="47dp"
                     android:text="Wheelchair Accesible"
+                    android:onClick="onCheckboxClicked"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ammenitesText" />
 
@@ -150,6 +153,7 @@
                     android:layout_marginStart="100dp"
                     android:layout_marginTop="16dp"
                     android:text="Other"
+                    android:onClick="onCheckboxClicked"
                     app:layout_constraintStart_toEndOf="@+id/heaterCheckBox"
                     app:layout_constraintTop_toBottomOf="@+id/wheelchairCheckBox" />
 

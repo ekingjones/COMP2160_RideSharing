@@ -16,6 +16,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -35,7 +36,8 @@ import java.util.Map;
 
 public class DriverStartActivity extends AppCompatActivity {
     // tags
-    public static final String mTAG = "COMP2160";
+    public static final String FILE_TAG = "FIRESTORE_DB_WRITES";
+
     // cloud vars
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -47,9 +49,17 @@ public class DriverStartActivity extends AppCompatActivity {
     private Date departDate;
     private String startLocation;
     private String endLocation;
+    private String optionsText;
+    private boolean acCheck = false;
+    private boolean wheelchairCheck = false;
+    private boolean heatCheck = false;
+    private boolean otherCheck = false;
 
     // car data variables
+    private int carYear;
+    private String carMake;
     private String carModel;
+    //private String numOfSeatsText;
     private int numOfSeats;
 
 
@@ -98,6 +108,7 @@ public class DriverStartActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+
     }
 
     @Override
@@ -114,9 +125,15 @@ public class DriverStartActivity extends AppCompatActivity {
     public void showTimePickerFragment(View v){
         DialogFragment newFrag = new TimePickerFragment();
         newFrag.show(getSupportFragmentManager(), "timePicker");
-        int driverHour = TimePickerFragment.userHour;
-        int driverMin = TimePickerFragment.userMin;
-        showTime(driverHour, driverMin);
+        Integer driverHour = TimePickerFragment.userHour;
+        Integer driverMin = TimePickerFragment.userMin;
+        if(driverHour == null || driverMin == null){
+
+        }
+        else{
+            showTime(driverHour, driverMin);
+        }
+
         //String testHour = Integer.toString(driverHour);
         //String testMin = Integer.toString(driverMin);
         //String test = ("Chosen Time:" + testHour + testMin);
@@ -137,12 +154,63 @@ public class DriverStartActivity extends AppCompatActivity {
         Toast.makeText(this, test, Toast.LENGTH_LONG).show();
     }
 
+    // method to check which ammenities check boxes are checked
+    public void onCheckboxClicked(View v){
+        // bool to confirm if a box is checked
+        boolean checked = ((CheckBox) v).isChecked();
+
+        // check which box was ticked
+        switch(v.getId()){
+            case R.id.acCheckBox:
+                if(checked)
+                    acCheck = true;
+                else
+                    acCheck = false;
+                break;
+            case R.id.wheelchairCheckBox:
+                if(checked)
+                    wheelchairCheck = true;
+                else
+                    wheelchairCheck = false;
+                break;
+            case R.id.heaterCheckBox:
+                if(checked)
+                    heatCheck = true;
+                else
+                    heatCheck = false;
+                break;
+            case R.id.otherCheckBox:
+                if(checked)
+                    otherCheck = true;
+                else
+                    otherCheck = false;
+        }
+    }
+
+
     // updates data from user entries and assigns to global vars for easy access
     public void getData(){
+        // get all the required data from text fields
         TextView startLocal = (TextView) (findViewById(R.id.startingLocation));
         TextView endLocal = (TextView) findViewById(R.id.destLocation);
+        TextView carBrand = (TextView) findViewById(R.id.makeEditText);
+        TextView carMod = (TextView) findViewById(R.id.modelEditText);
+        TextView carAge = (TextView) findViewById(R.id.yearEditText);
+        TextView seatNum = (TextView) findViewById(R.id.seatsEditText);
         startLocation = startLocal.getText().toString();
         endLocation = endLocal.getText().toString();
+        carMake = carBrand.getText().toString();
+        carModel = carMod.getText().toString();
+        carYear = Integer.parseInt(carAge.getText().toString());
+        numOfSeats = Integer.parseInt(seatNum.getText().toString());
+
+        // dealing with optionals
+        if(otherCheck = true) {
+            TextView options = (TextView) findViewById(R.id.otherEditText);
+            optionsText = options.getText().toString();
+        }
+
+
     }
 
 
@@ -151,26 +219,34 @@ public class DriverStartActivity extends AppCompatActivity {
         // calls getData method to update the trip info before submitting
         getData();
 
-        // gets the collection of available trips for cloud
+        // writes to a collection of avalible trips
         Map<String, Object> avail_trips = new HashMap<>();
 
         // gets user entry data and submits to available trips database
-        avail_trips.put("depart_local", startLocation);
-        avail_trips.put("dest_local", endLocation);
+        avail_trips.put("start_local", startLocation);
+        avail_trips.put("end_local", endLocation);
+        avail_trips.put("car_make", carMake);
+        avail_trips.put("car_model", carModel);
+        avail_trips.put("car_year", carYear);
+        avail_trips.put("number_of_seats", numOfSeats);
+        avail_trips.put("ac_check", acCheck);
+        avail_trips.put("heat_check", heatCheck);
 
         // listeners for success and fail
         db.collection("avail_trips")
+                // take note, that the line below adds to the collection with a randomly generated doc id
+                // if this is ever successful, there may be name collision, but for now, no need to worry
                 .add(avail_trips)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d(mTAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                        Log.d(FILE_TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(mTAG, "Error adding document", e);
+                        Log.w(FILE_TAG, "Error adding document", e);
                     }
                 });
 
