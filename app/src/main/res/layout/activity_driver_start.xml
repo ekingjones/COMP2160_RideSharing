@@ -176,6 +176,7 @@
                     android:layout_marginStart="74dp"
                     android:layout_marginEnd="74dp"
                     android:layout_marginBottom="18dp"
+                    android:onClick="planOnMap"
                     android:text="Plan Trip on Map"
                     app:layout_constraintBottom_toTopOf="@+id/carInfoText"
                     app:layout_constraintEnd_toEndOf="parent"

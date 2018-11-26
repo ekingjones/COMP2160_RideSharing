@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OnboardActivity">
+    tools:context=".FindRideActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/DestLocation" />
+                    app:layout_constraintTop_toBottomOf="@+id/destLocation" />
 
                 <TextView
                     android:id="@+id/tripDetailsTextView3"
@@ -61,7 +61,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/DestLocation"
+                    android:id="@+id/destLocation"
                     android:layout_width="368dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -107,7 +107,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/DestLocation">
+                    app:layout_constraintTop_toBottomOf="@+id/destLocation">
 
                     <RadioButton
                         android:id="@+id/departButton"
@@ -136,7 +136,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/DestLocation" />
+                    app:layout_constraintTop_toBottomOf="@+id/destLocation" />
 
                 <TextView
                     android:id="@+id/pickArrivalTime"
@@ -150,7 +150,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/DestLocation" />
+                    app:layout_constraintTop_toBottomOf="@+id/destLocation" />
 
                 <Button
                     android:id="@+id/findTripButton"
@@ -159,6 +159,7 @@
                     android:layout_marginStart="139dp"
                     android:layout_marginEnd="137dp"
                     android:layout_marginBottom="163dp"
+                    android:onClick="mapTest"
                     android:text="Find Trips"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,7 @@
 package com.comp2160.robot.comp2160_ridesharing;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -8,10 +9,33 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class FindRideActivity extends AppCompatActivity {
+    private static final String mTAG = "GET_TAG";
+    // firebase vars
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    // main component vars
     private DrawerLayout mDrawerLayout;
+
+    // trip queries vars
+    private String startLocation;
+    private String endLocation;
+    private int seatsNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,5 +104,59 @@ public class FindRideActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    // method to get data from user
+    public void getData(){
+        try {
+            TextView pickupLocal = (TextView) findViewById(R.id.pickupLocation);
+            TextView destLocal = (TextView) findViewById(R.id.destLocation);
+            TextView seats = (TextView) findViewById(R.id.numOfSeats);
+            startLocation = pickupLocal.getText().toString();
+            endLocation = destLocal.getText().toString();
+            //seatsNum = Integer.parseInt(seats.getText().toString()); TODO better exception handling for this
+        }catch (Exception e){
+
+        }
+    }
+
+    public void mapTest(View v){
+        Intent getMap = new Intent(FindRideActivity.this, OnboardActivity.class);
+        startActivity(getMap);
+    }
+
+    // method to search for data
+    public void tripLookup(View v){
+
+        // this snippet makes firebase behave properly, dont know why
+        // DONT TOUCH
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        firestore.setFirestoreSettings(settings);
+
+        // updates and gets data from vars
+        getData();
+
+        // looks up trips according to user input
+        db.collection("avail_trips")
+                //.whereEqualTo("start_local", startLocation)
+                .whereEqualTo("end_local", endLocation)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(mTAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.d(mTAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 }

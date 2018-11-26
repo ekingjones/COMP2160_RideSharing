@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
@@ -154,6 +155,12 @@ public class DriverStartActivity extends AppCompatActivity {
         Toast.makeText(this, test, Toast.LENGTH_LONG).show();
     }
 
+    // method to open maps layout
+    public void planOnMap(View v){
+        Intent mapsIntent = new Intent(DriverStartActivity.this, DirectionsActivity.class);
+        startActivity(mapsIntent);
+    }
+
     // method to check which ammenities check boxes are checked
     public void onCheckboxClicked(View v){
         // bool to confirm if a box is checked
@@ -209,7 +216,6 @@ public class DriverStartActivity extends AppCompatActivity {
             TextView options = (TextView) findViewById(R.id.otherEditText);
             optionsText = options.getText().toString();
         }
-
 
     }
 

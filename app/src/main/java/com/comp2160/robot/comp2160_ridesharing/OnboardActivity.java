@@ -24,6 +24,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.firestore.GeoPoint;
 
 import org.xmlpull.v1.sax2.Driver;
 
@@ -33,12 +34,20 @@ import java.util.List;
 public class OnboardActivity extends AppCompatActivity implements OnMapReadyCallback {
     // global variables
     private DrawerLayout mDrawerLayout;
+
+    // map vars
     private MapView mapView;
     private GoogleMap mMap;
 
 
+
+
     // final vars and keys
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
