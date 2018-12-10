@@ -1,5 +1,6 @@
 package com.comp2160.robot.comp2160_ridesharing;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,6 +60,16 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void loginToApp(View v){
+        Intent startApp = new Intent(LoginActivity.this, FindRideActivity.class);
+        startActivity(startApp);
+    }
+
+    public void signUp(View v){
+        Intent signUpAccount = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(signUpAccount);
     }
 
 }

@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,8 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--map doesnt render without the below lib flag, who knows why ¯\_(ツ)_/¯  -->
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <!-- map doesnt render without the below lib flag, who knows why ¯\_(ツ)_/¯ -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -30,27 +33,23 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBMLqjeiWFSE24s3BrYsdRituPokKNtbQs" />
 
-
         <!-- activities -->
         <activity android:name=".OnboardActivity" />
-
         <activity android:name=".DriverStartActivity" />
-
-        <activity android:name=".FindRideActivity">
+        <activity android:name=".FindRideActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".LoginActivity" />
-
         <activity android:name=".TestActivity" />
-
         <activity
             android:name=".DirectionsActivity"
-            android:label="@string/title_activity_directions"></activity>
+            android:label="@string/title_activity_directions" />
+        <activity android:name=".TripsTwo"></activity>
+        <activity android:name=".SignUpActivity"/>
     </application>
 
 </manifest>

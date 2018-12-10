@@ -116,47 +116,31 @@ public class FindRideActivity extends AppCompatActivity {
             TextView seats = (TextView) findViewById(R.id.numOfSeats);
             startLocation = pickupLocal.getText().toString();
             endLocation = destLocal.getText().toString();
-            //seatsNum = Integer.parseInt(seats.getText().toString()); TODO better exception handling for this
+            seatsNum = Integer.parseInt(seats.getText().toString());
         }catch (Exception e){
 
         }
     }
 
-    public void mapTest(View v){
-        Intent getMap = new Intent(FindRideActivity.this, OnboardActivity.class);
-        startActivity(getMap);
+
+    // method to get current location
+    public void getLocation(View v){
+        Intent getLocat = new Intent(FindRideActivity.this, DirectionsActivity.class);
+        startActivity(getLocat);
     }
 
     // method to search for data
-    public void tripLookup(View v){
-
-        // this snippet makes firebase behave properly, dont know why
-        // DONT TOUCH
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setTimestampsInSnapshotsEnabled(true)
-                .build();
-        firestore.setFirestoreSettings(settings);
+    public void tripLookup(View v) {
 
         // updates and gets data from vars
         getData();
 
-        // looks up trips according to user input
-        db.collection("avail_trips")
-                //.whereEqualTo("start_local", startLocation)
-                .whereEqualTo("end_local", endLocation)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(mTAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(mTAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+        // intent to send to trips activity
+        Intent findTrips = new Intent(FindRideActivity.this, TripsTwo.class);
+        findTrips.putExtra("START", startLocation);
+        findTrips.putExtra("END", endLocation);
+        findTrips.putExtra("SEATS", seatsNum);
+        startActivity(findTrips);
+
     }
 }

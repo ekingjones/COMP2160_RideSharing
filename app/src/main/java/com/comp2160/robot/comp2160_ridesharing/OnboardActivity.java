@@ -46,9 +46,6 @@ public class OnboardActivity extends AppCompatActivity implements OnMapReadyCall
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

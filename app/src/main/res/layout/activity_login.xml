@@ -2,14 +2,18 @@
 <RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools = "http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
 
-    <TextView android:text = "Login" android:layout_width="wrap_content"
-        android:layout_height = "wrap_content"
-        android:id = "@+id/textview"
-        android:textSize = "35dp"
-        android:layout_alignParentTop = "true"
-        android:layout_centerHorizontal = "true" />
+
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/textView2"
+        android:text="Login"
+        android:textSize="35dp" />
 
     <EditText
         android:layout_width = "wrap_content"
@@ -63,13 +67,13 @@
         android:layout_toRightOf="@+id/textview" />
 
     <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="login"
-        android:id="@+id/button"
         android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/textview"
         android:layout_toLeftOf="@+id/textview"
-        android:layout_toStartOf="@+id/textview" />
+        android:text="login" />
 
     <Button
         android:layout_width="wrap_content"
@@ -88,6 +92,25 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="253dp"
         app:srcCompat="@drawable/login_image" />
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="155dp"
+        android:onClick="signUp"
+        android:text="Sign Up" />
+
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/signUpButton"
+        android:layout_alignParentBottom="true"
+        android:onClick="loginToApp"
+        android:text="Go" />
 
 
 </RelativeLayout>

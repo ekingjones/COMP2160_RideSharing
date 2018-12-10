@@ -60,7 +60,6 @@ public class DriverStartActivity extends AppCompatActivity {
     private int carYear;
     private String carMake;
     private String carModel;
-    //private String numOfSeatsText;
     private int numOfSeats;
 
 
